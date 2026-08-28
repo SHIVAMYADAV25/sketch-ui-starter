@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Vite App",
+  "extends": "./react-library.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true
+  }
+}

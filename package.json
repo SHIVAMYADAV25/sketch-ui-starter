@@ -1,0 +1,49 @@
+{
+  "name": "sketch-ui",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A production-grade, hand-drawn / sketch aesthetic React component library — monorepo root",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@9.7.0",
+  "engines": {
+    "node": ">=18.18.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,json,css}\" --cache",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,json,css}\" --cache",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test -- --coverage",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=./packages/* && changeset publish",
+    "storybook": "pnpm --filter @sketch-ui/react storybook",
+    "prepare": "husky",
+    "check": "turbo run lint typecheck test build"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.9",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "turbo": "^2.1.3",
+    "typescript": "^5.6.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
+    "*.{ts,tsx,js,jsx,md,mdx,json,css}": [
+      "prettier --write"
+    ]
+  }
+}

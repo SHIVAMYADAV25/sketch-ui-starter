@@ -1,0 +1,8 @@
+dist
+build
+.next
+storybook-static
+coverage
+pnpm-lock.yaml
+.turbo
+CHANGELOG.md

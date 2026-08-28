@@ -1,0 +1,11 @@
+{
+  "name": "@sketch-ui/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "files": [
+    "base.json",
+    "react-library.json",
+    "vite.json"
+  ]
+}

@@ -1,0 +1,10 @@
+/**
+ * @sketch-ui/react global stylesheet.
+ *
+ * Consumers import this once at their app root:
+ *   import '@sketch-ui/react/styles.css'
+ *
+ * Nothing is defined here yet — add your design tokens / base styles and
+ * each component's CSS as you build them. `scripts/build-css.mjs` copies
+ * this file to dist/styles.css as part of `pnpm build`.
+ */
