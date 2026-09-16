@@ -8,4 +8,5 @@
 //
 // Example, once you add a real component:
 //   export * from './components/Button';
-export {};
+export * from './primitives/SketchFrame';
+export * from './components/Button';

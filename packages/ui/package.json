@@ -15,16 +15,24 @@
     },
     "./styles.css": "./dist/styles.css"
   },
-  "files": ["dist"],
-  "sideEffects": ["**/*.css"],
-  "keywords": ["react", "component-library", "design-system"],
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "keywords": [
+    "react",
+    "component-library",
+    "design-system"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sketch-ui/sketch-ui.git",
     "directory": "packages/ui"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node ./scripts/build-css.mjs",
     "dev": "tsup --watch",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",

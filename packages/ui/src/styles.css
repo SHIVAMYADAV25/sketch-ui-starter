@@ -8,3 +8,27 @@
  * each component's CSS as you build them. `scripts/build-css.mjs` copies
  * this file to dist/styles.css as part of `pnpm build`.
  */
+
+:root {
+  --sk-color-ink: #1b1b1b;
+  --sk-color-paper: #fbf7ee;
+  --sk-color-pencil: #6b6558;
+  --sk-color-primary: #e4572e;
+  --sk-color-success: #4c8577;
+  --sk-color-danger: #c1443a;
+  --sk-color-warning: #ffd23f;
+  --sk-space-1: 4px;
+  --sk-space-2: 8px;
+  --sk-space-3: 12px;
+  --sk-space-4: 16px;
+  --sk-radius-sm: 4px;
+  --sk-radius-md: 8px;
+  --sk-radius-lg: 14px;
+  --sk-font-display: 'Patrick Hand', 'Caveat', cursive;
+  --sk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sk-fontSize-sm: 0.9rem;
+  --sk-fontSize-md: 1.05rem;
+  --sk-fontSize-lg: 1.2rem;
+  --sk-fontSize-xl: 1.35rem;
+  --sk-focus-ring: 0 0 0 3px rgba(228, 87, 46, 0.35);
+}

@@ -1,0 +1,116 @@
+.sk-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sk-space-2, 8px);
+  border: none;
+  background: transparent;
+  font-family: var(--sk-font-display, 'Patrick Hand', cursive);
+  font-weight: 600;
+  color: var(--sk-button-text, var(--sk-color-ink, #1a1a1a));
+  cursor: pointer;
+  line-height: 1;
+}
+.sk-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.sk-button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+}
+.sk-button__frame {
+  z-index: 0;
+}
+.sk-button__content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sk-space-2, 8px);
+}
+.sk-button:focus-visible {
+  outline: none;
+  box-shadow: var(--sk-focus-ring, 0 0 0 3px rgba(228, 87, 46, 0.35));
+  border-radius: var(--sk-radius-md, 8px);
+}
+
+.sk-button--size-sm {
+  padding: 8px 16px;
+  font-size: var(--sk-fontSize-sm, 0.9rem);
+}
+.sk-button--size-md {
+  padding: 10px 20px;
+  font-size: var(--sk-fontSize-md, 1.05rem);
+}
+.sk-button--size-lg {
+  padding: 12px 26px;
+  font-size: var(--sk-fontSize-lg, 1.2rem);
+}
+.sk-button--size-xl {
+  padding: 14px 32px;
+  font-size: var(--sk-fontSize-xl, 1.35rem);
+}
+.sk-button--size-icon {
+  padding: 12px;
+  font-size: var(--sk-fontSize-md, 1.05rem);
+  aspect-ratio: 1 / 1;
+}
+.sk-button--full-width {
+  display: flex;
+  width: 100%;
+}
+
+.sk-button--variant-primary {
+  --sk-frame-fill: var(--sk-color-primary, #e4572e);
+  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
+  --sk-button-text: var(--sk-color-paper, #fbf7ee);
+}
+.sk-button--variant-secondary {
+  --sk-frame-fill: var(--sk-color-paper, #fbf7ee);
+  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
+  --sk-button-text: var(--sk-color-ink, #1a1a1a);
+}
+.sk-button--variant-ghost {
+  --sk-frame-fill: transparent;
+  --sk-frame-stroke: var(--sk-color-pencil, #6b6558);
+  --sk-button-text: var(--sk-color-ink, #1a1a1a);
+}
+.sk-button--variant-success {
+  --sk-frame-fill: var(--sk-color-success, #4c8577);
+  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
+  --sk-button-text: var(--sk-color-paper, #fbf7ee);
+}
+.sk-button--variant-danger {
+  --sk-frame-fill: var(--sk-color-danger, #c1443a);
+  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
+  --sk-button-text: var(--sk-color-paper, #fbf7ee);
+}
+.sk-button--variant-warning {
+  --sk-frame-fill: var(--sk-color-warning, #ffd23f);
+  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
+  --sk-button-text: var(--sk-color-ink, #1a1a1a);
+}
+
+.sk-button__spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: sk-button-spin 700ms linear infinite;
+}
+@keyframes sk-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk-button__spinner {
+    animation-duration: 1.5s;
+  }
+  .sk-button:active:not(:disabled) {
+    transform: none;
+  }
+}
