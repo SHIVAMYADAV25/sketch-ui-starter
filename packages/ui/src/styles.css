@@ -1,34 +1,65 @@
-/**
- * @sketch-ui/react global stylesheet.
- *
- * Consumers import this once at their app root:
- *   import '@sketch-ui/react/styles.css'
- *
- * Nothing is defined here yet — add your design tokens / base styles and
- * each component's CSS as you build them. `scripts/build-css.mjs` copies
- * this file to dist/styles.css as part of `pnpm build`.
- */
+/* ==========================================================================
+   Design tokens. Every component reads these; nothing hardcodes a hex value
+   outside this file, so a consumer can retheme the whole library by
+   redefining a handful of properties on :root or on a wrapper element.
+   ========================================================================== */
 
 :root {
-  --sk-color-ink: #1b1b1b;
-  --sk-color-paper: #fbf7ee;
+  /* Ink and paper */
+  --sk-color-ink: #1a1a1a;
+  --sk-color-paper: #ffffff;
   --sk-color-pencil: #6b6558;
-  --sk-color-primary: #e4572e;
-  --sk-color-success: #4c8577;
-  --sk-color-danger: #c1443a;
-  --sk-color-warning: #ffd23f;
+  --sk-color-canvas: #faf9f6;
+
+  /* Accent ramps: 100 = pastel wash, 500 = pastel-weight marks, 700 = opaque */
+  --sk-color-blue-100: #b8cff7;
+  --sk-color-blue-500: #4f78d6;
+  --sk-color-blue-600: #3b6fc4;
+  --sk-color-blue-700: #2563eb;
+
+  --sk-color-green-100: #d8ebc0;
+  --sk-color-green-500: #77a34b;
+  --sk-color-green-700: #16a34a;
+
+  --sk-color-rose-100: #f9c5cd;
+  --sk-color-rose-500: #cf5a73;
+  --sk-color-rose-700: #e11d48;
+
+  --sk-color-amber-100: #fde09e;
+  --sk-color-amber-500: #d69427;
+  --sk-color-amber-700: #d97706;
+
+  --sk-color-violet-100: #ecd0fa;
+  --sk-color-violet-500: #9c59c4;
+  --sk-color-violet-700: #8e49b8;
+
+  --sk-color-teal-100: #c2ede5;
+  --sk-color-teal-500: #43a896;
+  --sk-color-teal-700: #0f766e;
+
+  /* Frame defaults, used when a component sets none of its own */
+  --sk-frame-paper: transparent;
+  --sk-frame-ink: var(--sk-color-pencil);
+  --sk-frame-line: var(--sk-color-ink);
+  --sk-frame-highlight: rgba(255, 255, 255, 0.85);
+
+  /* Space */
   --sk-space-1: 4px;
   --sk-space-2: 8px;
   --sk-space-3: 12px;
   --sk-space-4: 16px;
+  --sk-space-6: 24px;
+
+  /* Radius */
   --sk-radius-sm: 4px;
   --sk-radius-md: 8px;
   --sk-radius-lg: 14px;
-  --sk-font-display: 'Patrick Hand', 'Caveat', cursive;
-  --sk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --sk-fontSize-sm: 0.9rem;
-  --sk-fontSize-md: 1.05rem;
-  --sk-fontSize-lg: 1.2rem;
-  --sk-fontSize-xl: 1.35rem;
-  --sk-focus-ring: 0 0 0 3px rgba(228, 87, 46, 0.35);
+
+  /* Type */
+  --sk-font-display: 'Patrick Hand', 'Caveat', 'Comic Sans MS', cursive;
+  --sk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sk-font-size-sm: 1.05rem;
+  --sk-font-size-md: 1.25rem;
+  --sk-font-size-lg: 1.45rem;
+  --sk-font-size-xl: 1.6rem;
 }

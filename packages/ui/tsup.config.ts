@@ -1,5 +1,3 @@
-import { copyFileSync, mkdirSync } from 'node:fs';
-
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
@@ -8,9 +6,12 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
+  treeshake: true,
   external: ['react', 'react-dom'],
-  onSuccess: async () => {
-    mkdirSync('dist', { recursive: true });
-    copyFileSync('src/styles.css', 'dist/styles.css');
+  // No `injectStyle`, no CSS entry: stylesheets are assembled by
+  // scripts/build-css.mjs so that dist/styles.css — the file package.json
+  // exports — is the one and only stylesheet consumers need.
+  esbuildOptions(options) {
+    options.jsx = 'automatic';
   },
 });

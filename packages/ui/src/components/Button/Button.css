@@ -1,116 +1,249 @@
+/* ==========================================================================
+   Button — layout, typography and theming.
+   The border is NOT here: it's drawn by <SketchFrame> as SVG. This file only
+   ever sets the custom properties that frame reads.
+   ========================================================================== */
+
 .sk-button {
+  /* Establishes the positioning context the absolutely-positioned frame needs.
+     If this rule doesn't load, the frame escapes to the top-left of the page —
+     which is exactly what the broken Storybook screenshots showed. */
   position: relative;
   isolation: isolate;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--sk-space-2, 8px);
-  border: none;
+
+  margin: 0;
+  border: 0;
   background: transparent;
-  font-family: var(--sk-font-display, 'Patrick Hand', cursive);
-  font-weight: 600;
-  color: var(--sk-button-text, var(--sk-color-ink, #1a1a1a));
-  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+
+  font-family: var(--sk-font-display, 'Patrick Hand', 'Caveat', cursive);
+  font-weight: 400;
   line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  color: var(--sk-button-text, var(--sk-color-ink, #1a1a1a));
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 80ms ease;
 }
-.sk-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-.sk-button:active:not(:disabled) {
-  transform: translateY(1px) scale(0.98);
-}
+
 .sk-button__frame {
   z-index: 0;
 }
+
 .sk-button__content {
   position: relative;
   z-index: 1;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--sk-space-2, 8px);
+  min-width: 0;
 }
+
+/* Long labels stay on one line and ellipsize rather than wrapping into a
+   two-line button the frame would then have to stretch around. */
+.sk-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sk-button:active:not(:disabled):not([aria-disabled='true']) {
+  transform: translateY(1.5px) scale(0.98);
+}
+
+.sk-button:disabled,
+.sk-button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* A dashed ring reads as "drawn on" rather than as a browser focus rect, and
+   sits outside the sketch frame so it never fights with the ink. */
 .sk-button:focus-visible {
-  outline: none;
-  box-shadow: var(--sk-focus-ring, 0 0 0 3px rgba(228, 87, 46, 0.35));
+  outline: 2px dashed var(--sk-color-ink, #1a1a1a);
+  outline-offset: 5px;
   border-radius: var(--sk-radius-md, 8px);
 }
 
+/* --------------------------------------------------------------------------
+   Sizes — intrinsic. Padding + content decide the box; `min-inline-size` keeps
+   short labels looking generous, the way fixed pixel widths used to, without
+   clipping a longer one.
+   -------------------------------------------------------------------------- */
+
 .sk-button--size-sm {
-  padding: 8px 16px;
-  font-size: var(--sk-fontSize-sm, 0.9rem);
+  padding: 10px 18px;
+  font-size: var(--sk-font-size-sm, 1.05rem);
+  min-inline-size: var(--sk-button-min-sm, 150px);
 }
+
 .sk-button--size-md {
-  padding: 10px 20px;
-  font-size: var(--sk-fontSize-md, 1.05rem);
+  padding: 14px 24px;
+  font-size: var(--sk-font-size-md, 1.25rem);
+  min-inline-size: var(--sk-button-min-md, 200px);
 }
+
 .sk-button--size-lg {
-  padding: 12px 26px;
-  font-size: var(--sk-fontSize-lg, 1.2rem);
+  padding: 17px 28px;
+  font-size: var(--sk-font-size-lg, 1.45rem);
+  min-inline-size: var(--sk-button-min-lg, 240px);
 }
+
 .sk-button--size-xl {
-  padding: 14px 32px;
-  font-size: var(--sk-fontSize-xl, 1.35rem);
+  padding: 20px 32px;
+  font-size: var(--sk-font-size-xl, 1.6rem);
+  min-inline-size: var(--sk-button-min-xl, 280px);
 }
+
 .sk-button--size-icon {
-  padding: 12px;
-  font-size: var(--sk-fontSize-md, 1.05rem);
-  aspect-ratio: 1 / 1;
+  padding: 0;
+  inline-size: var(--sk-button-icon-size, 46px);
+  block-size: var(--sk-button-icon-size, 46px);
+  min-inline-size: 0;
+  font-size: var(--sk-font-size-md, 1.25rem);
 }
+
 .sk-button--full-width {
   display: flex;
-  width: 100%;
+  inline-size: 100%;
+  min-inline-size: 0;
 }
 
-.sk-button--variant-primary {
-  --sk-frame-fill: var(--sk-color-primary, #e4572e);
-  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
-  --sk-button-text: var(--sk-color-paper, #fbf7ee);
+/* --------------------------------------------------------------------------
+   Variants — each one sets four custom properties and nothing else.
+     --sk-frame-paper  flat wash behind the texture
+     --sk-frame-ink    texture marks (pastel-weight)
+     --sk-frame-solid  the saturated version, used by the gouache texture
+     --sk-button-text  label colour
+   -------------------------------------------------------------------------- */
+
+.sk-button--primary {
+  --sk-frame-paper: var(--sk-color-blue-100, #b8cff7);
+  --sk-frame-ink: var(--sk-color-blue-500, #4f78d6);
+  --sk-frame-solid: var(--sk-color-blue-700, #2563eb);
 }
-.sk-button--variant-secondary {
-  --sk-frame-fill: var(--sk-color-paper, #fbf7ee);
-  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
+
+.sk-button--secondary {
+  --sk-frame-paper: var(--sk-color-paper, #ffffff);
+  --sk-frame-ink: var(--sk-color-pencil, #6b6558);
+  --sk-frame-solid: var(--sk-color-ink, #1a1a1a);
+}
+
+.sk-button--ghost {
+  --sk-frame-paper: transparent;
+  --sk-frame-ink: var(--sk-color-pencil, #6b6558);
+  --sk-frame-solid: var(--sk-color-pencil, #6b6558);
+  --sk-frame-line: var(--sk-color-pencil, #6b6558);
+}
+
+.sk-button--success {
+  --sk-frame-paper: var(--sk-color-green-100, #d8ebc0);
+  --sk-frame-ink: var(--sk-color-green-500, #77a34b);
+  --sk-frame-solid: var(--sk-color-green-700, #16a34a);
+}
+
+.sk-button--danger {
+  --sk-frame-paper: var(--sk-color-rose-100, #f9c5cd);
+  --sk-frame-ink: var(--sk-color-rose-500, #cf5a73);
+  --sk-frame-solid: var(--sk-color-rose-700, #e11d48);
+}
+
+.sk-button--warning {
+  --sk-frame-paper: var(--sk-color-amber-100, #fde09e);
+  --sk-frame-ink: var(--sk-color-amber-500, #d69427);
+  --sk-frame-solid: var(--sk-color-amber-700, #d97706);
+}
+
+.sk-button--info {
+  --sk-frame-paper: var(--sk-color-violet-100, #ecd0fa);
+  --sk-frame-ink: var(--sk-color-violet-500, #9c59c4);
+  --sk-frame-solid: var(--sk-color-violet-700, #8e49b8);
+}
+
+/* Opaque paint covers the paper completely, so the label flips to light ink
+   and the pastel highlight is dialled back to a thin sheen. */
+.sk-button[data-texture='gouache'] {
+  --sk-frame-ink: var(--sk-frame-solid);
+  --sk-frame-highlight: rgba(255, 255, 255, 0.28);
+  --sk-button-text: var(--sk-color-paper, #ffffff);
+}
+
+.sk-button--secondary[data-texture='gouache'],
+.sk-button--warning[data-texture='gouache'] {
   --sk-button-text: var(--sk-color-ink, #1a1a1a);
 }
-.sk-button--variant-ghost {
-  --sk-frame-fill: transparent;
-  --sk-frame-stroke: var(--sk-color-pencil, #6b6558);
-  --sk-button-text: var(--sk-color-ink, #1a1a1a);
+
+/* --------------------------------------------------------------------------
+   Link variant — no frame, a drawn underline instead.
+   -------------------------------------------------------------------------- */
+
+.sk-button--link {
+  --sk-underline: var(--sk-color-blue-600, #3b6fc4);
+  padding: 6px 4px;
+  min-inline-size: 0;
 }
-.sk-button--variant-success {
-  --sk-frame-fill: var(--sk-color-success, #4c8577);
-  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
-  --sk-button-text: var(--sk-color-paper, #fbf7ee);
+
+.sk-button__link-body {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
 }
-.sk-button--variant-danger {
-  --sk-frame-fill: var(--sk-color-danger, #c1443a);
-  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
-  --sk-button-text: var(--sk-color-paper, #fbf7ee);
+
+.sk-button--link:hover {
+  --sk-underline: var(--sk-color-blue-700, #2d589f);
 }
-.sk-button--variant-warning {
-  --sk-frame-fill: var(--sk-color-warning, #ffd23f);
-  --sk-frame-stroke: var(--sk-color-ink, #1a1a1a);
-  --sk-button-text: var(--sk-color-ink, #1a1a1a);
-}
+
+/* --------------------------------------------------------------------------
+   Loading spinner
+   -------------------------------------------------------------------------- */
 
 .sk-button__spinner {
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
+  inline-size: 1em;
+  block-size: 1em;
+  flex: none;
   border: 2px solid currentColor;
   border-top-color: transparent;
+  border-radius: 50%;
   animation: sk-button-spin 700ms linear infinite;
 }
+
 @keyframes sk-button-spin {
   to {
     transform: rotate(360deg);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .sk-button__spinner {
-    animation-duration: 1.5s;
+  .sk-button {
+    transition: none;
   }
+
   .sk-button:active:not(:disabled) {
     transform: none;
+  }
+
+  .sk-button__spinner {
+    animation-duration: 2s;
+  }
+}
+
+/* Windows high-contrast mode drops the SVG frame's colours, so give the
+   button back a real border there. */
+@media (forced-colors: active) {
+  .sk-button {
+    border: 1px solid ButtonBorder;
   }
 }

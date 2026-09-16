@@ -7,11 +7,8 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
   ],
-  framework: {
-    name: '@storybook/react-vite',
-    options: {},
-  },
-  docs: { autodocs: 'tag' },
+  framework: { name: '@storybook/react-vite', options: {} },
+  typescript: { reactDocgen: 'react-docgen-typescript' },
 };
 
 export default config;
