@@ -16,13 +16,13 @@
     "@sketch-ui/react": "workspace:*",
     "@sketch-ui/utils": "workspace:*",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@sketch-ui/eslint-config": "workspace:*",
     "@sketch-ui/tsconfig": "workspace:*",
     "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^4.3.2",
     "typescript": "^5.6.3",
     "vite": "^5.4.8"
